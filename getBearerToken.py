@@ -1,3 +1,4 @@
+# import cryptography # 'pip install cryptography'
 import requests # Requests lib installation: 'pip install requests'
 import jwt # PyJWT lib installation: 'pip install pyjwt'
 import json
@@ -21,7 +22,8 @@ def getSignedJWT(credsFile):
 ​
    # Sign the claims object with the private key contained in the creds object
    signedJWT = jwt.encode(claims, creds["privateKey"], algorithm='RS256') 
-   return str(signedJWT, "utf-8"), creds 
+   # return str(signedJWT, "utf-8"), creds # for version of pyjwt < 2.0.0
+   return signedJWT, creds  # for version of pyjwt >= 2.0.0
 ​
 ​
 def getBearerToken(signedJWT, creds):
